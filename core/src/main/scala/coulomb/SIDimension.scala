@@ -21,13 +21,13 @@ import coulomb.kernel.*
 import scala.compiletime.ops.int.*
 
 final type SIDimension[
-  +Length <: Int,
-  +Mass <: Int,
-  +Time <: Int,
-  +ElectricCurrent <: Int,
-  +AmountOfSubstance <: Int,
-  +LuminousIntensity <: Int,
-  +Temperature <: Int
+  +T <: Int,
+  +L <: Int,
+  +M <: Int,
+  +I <: Int,
+  +Th <: Int,
+  +N <: Int,
+  +J <: Int
 ]
 
 object SIDimension:
@@ -50,23 +50,23 @@ object SIDimension:
         case (SIDimension[x1, x2, x3, x4, x5, x6, x7], SIDimension[y1, y2, y3, y4, y5, y6, y7]) =>
           SIDimension[x1 - y1, x2 - y2, x3 - y3, x4 - y4, x5 - y5, x6 - y6, x7 - y7]
 
-  given Length[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given Time[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[1, 0, 0, 0, 0, 0, 0]
 
-  given Mass[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given Length[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 1, 0, 0, 0, 0, 0]
 
-  given Time[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given Mass[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 0, 1, 0, 0, 0, 0]
 
   given ElectricCurrent[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 0, 0, 1, 0, 0, 0]
 
-  given AmountOfSubstance[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given Temperature[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 0, 0, 0, 1, 0, 0]
 
-  given LuminousIntensity[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given AmountOfSubstance[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 0, 0, 0, 0, 1, 0]
 
-  given Temperature[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
+  given LuminousIntensity[SIDimension[Int, Int, Int, Int, Int, Int, Int]] with
     type T = SIDimension[0, 0, 0, 0, 0, 0, 1]

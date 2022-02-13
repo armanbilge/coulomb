@@ -23,23 +23,23 @@ trait Dimension[D]:
   infix type **[D1 <: D, N <: Int] <: D
   infix type /[D1 <: D, D2 <: D] <: D
 
+trait Time[D]:
+  type T <: D
+
 trait Length[D]:
   type T <: D
 
 trait Mass[D]:
   type T <: D
-
-trait Time[D]:
+  
+trait ElectricCurrent[D]:
   type T <: D
 
-trait ElectricCurrent[D]:
+trait Temperature[D]:
   type T <: D
 
 trait AmountOfSubstance[D]:
   type T <: D
 
 trait LuminousIntensity[D]:
-  type T <: D
-
-trait Temperature[D]:
   type T <: D
