@@ -21,7 +21,17 @@ ThisBuild / tlSitePublishBranch := Some("no-such-branch")
 ThisBuild / crossScalaVersions := Seq("3.1.1")
 
 lazy val root = tlCrossRootProject
-  .aggregate(core, units)
+  .aggregate(kernel, core, units)
+
+lazy val kernel = crossProject(JVMPlatform, JSPlatform)
+  .crossType(CrossType.Pure)
+  .in(file("kernel"))
+  .settings(
+    name := "coulomb-kernel",
+    libraryDependencies ++= Seq(
+      "org.typelevel" %%% "algebra" % "2.7.0",
+    )
+  )
 
 lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Pure)
