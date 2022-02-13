@@ -20,7 +20,7 @@ import scala.compiletime.ops.int.*
 
 import Rational.ops.gcd
 
-type Rational[Num <: Int, Den <: Int] = gcd[Num, Den] match
+final type Rational[Num <: Int, Den <: Int] = gcd[Num, Den] match
   case 1 => ReducedRational[Num, Den]
   case Int => ReducedRational[Num / gcd[Num, Den], Den / gcd[Num, Den]]
 
