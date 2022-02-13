@@ -26,6 +26,6 @@ trait Dimension[D]:
   type LuminousIntensity <: D
   type Temperature <: D
 
-  infix type *[D1, D2] <: D
-  infix type **[D1, N <: Int & Singleton] <: D
-  infix type /[D1, D2] <: D
+  infix type *[D1 <: D, D2 <: D] <: D
+  infix type **[D1 <: D, N <: Int & Singleton] <: D
+  infix type /[D1 <: D, D2 <: D] <: D
