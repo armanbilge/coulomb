@@ -27,4 +27,5 @@ trait Dimension[D]:
   type Temperature <: D
 
   infix type *[D1, D2] <: D
+  infix type **[D1, N <: Int & Singleton] <: D
   infix type /[D1, D2] <: D
