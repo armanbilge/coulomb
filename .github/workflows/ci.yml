@@ -29,7 +29,7 @@ jobs:
         os: [ubuntu-latest]
         scala: [3.1.1]
         java: [temurin@8]
-        project: [rootJS, rootJVM, rootNative]
+        project: [rootJS, rootJVM]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
@@ -67,10 +67,6 @@ jobs:
         if: matrix.project == 'rootJS'
         run: sbt 'project ${{ matrix.project }}' '++${{ matrix.scala }}' Test/fastOptJS
 
-      - name: nativeLink
-        if: matrix.project == 'rootNative'
-        run: sbt 'project ${{ matrix.project }}' '++${{ matrix.scala }}' Test/nativeLink
-
       - name: Test
         run: sbt 'project ${{ matrix.project }}' '++${{ matrix.scala }}' test
 
@@ -84,11 +80,11 @@ jobs:
 
       - name: Make target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/scala3')
-        run: mkdir -p target all/target units/.jvm/target .js/target core/.native/target site/target core/.js/target units/.native/target core/.jvm/target .jvm/target .native/target units/.js/target project/target
+        run: mkdir -p target all/target units/.jvm/target .js/target site/target kernel/.jvm/target core/.js/target kernel/.js/target core/.jvm/target .jvm/target .native/target units/.js/target project/target
 
       - name: Compress target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/scala3')
-        run: tar cf targets.tar target all/target units/.jvm/target .js/target core/.native/target site/target core/.js/target units/.native/target core/.jvm/target .jvm/target .native/target units/.js/target project/target
+        run: tar cf targets.tar target all/target units/.jvm/target .js/target site/target kernel/.jvm/target core/.js/target kernel/.js/target core/.jvm/target .jvm/target .native/target units/.js/target project/target
 
       - name: Upload target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/scala3')
@@ -148,16 +144,6 @@ jobs:
           name: target-${{ matrix.os }}-${{ matrix.java }}-3.1.1-rootJVM
 
       - name: Inflate target directories (3.1.1, rootJVM)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (3.1.1, rootNative)
-        uses: actions/download-artifact@v2
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-3.1.1-rootNative
-
-      - name: Inflate target directories (3.1.1, rootNative)
         run: |
           tar xf targets.tar
           rm targets.tar
