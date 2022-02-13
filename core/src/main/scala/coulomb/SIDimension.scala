@@ -20,7 +20,7 @@ import coulomb.kernel.*
 
 import scala.compiletime.ops.int.*
 
-sealed trait SIDimension[
+final type SIDimension[
   +Length <: Int,
   +Mass <: Int,
   +Time <: Int,
