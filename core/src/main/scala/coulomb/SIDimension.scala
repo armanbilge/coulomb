@@ -40,7 +40,7 @@ object SIDimension:
         case (SIDimension[x1, x2, x3, x4, x5, x6, x7], SIDimension[y1, y2, y3, y4, y5, y6, y7]) =>
           SIDimension[x1 + y1, x2 + y2, x3 + y3, x4 + y4, x5 + y5, x6 + y6, x7 + y7]
 
-    infix type **[D1 <: SIDimension[Int, Int, Int, Int, Int, Int, Int], N <: Int] =
+    infix type ^[D1 <: SIDimension[Int, Int, Int, Int, Int, Int, Int], N <: Int] =
       D1 match
         case SIDimension[x1, x2, x3, x4, x5, x6, x7] =>
           SIDimension[x1 + N, x2 + N, x3 + N, x4 + N, x5 + N, x6 + N, x7 + N]
