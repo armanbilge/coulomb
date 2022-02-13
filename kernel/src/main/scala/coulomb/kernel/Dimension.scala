@@ -16,16 +16,30 @@
 
 package coulomb.kernel
 
-trait SIDimension[D]:
-  type Identity <: D
-  type Length <: D
-  type Mass <: D
-  type Time <: D
-  type ElectricCurrent <: D
-  type AmountOfSubstance <: D
-  type LuminousIntensity <: D
-  type Temperature <: D
+trait Dimension[D]:
+  type Id <: D
 
   infix type *[D1 <: D, D2 <: D] <: D
   infix type **[D1 <: D, N <: Int] <: D
   infix type /[D1 <: D, D2 <: D] <: D
+
+trait Length[D]:
+  type T <: D
+
+trait Mass[D]:
+  type T <: D
+
+trait Time[D]:
+  type T <: D
+
+trait ElectricCurrent[D]:
+  type T <: D
+
+trait AmountOfSubstance[D]:
+  type T <: D
+
+trait LuminousIntensity[D]:
+  type T <: D
+
+trait Temperature[D]:
+  type T <: D
