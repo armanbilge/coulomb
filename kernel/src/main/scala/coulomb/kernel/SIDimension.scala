@@ -16,7 +16,7 @@
 
 package coulomb.kernel
 
-trait Dimension[D]:
+trait SIDimension[D]:
   type Identity <: D
   type Length <: D
   type Mass <: D
@@ -27,5 +27,5 @@ trait Dimension[D]:
   type Temperature <: D
 
   infix type *[D1 <: D, D2 <: D] <: D
-  infix type **[D1 <: D, N <: Int & Singleton] <: D
+  infix type **[D1 <: D, N <: Int] <: D
   infix type /[D1 <: D, D2 <: D] <: D

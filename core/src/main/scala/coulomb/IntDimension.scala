@@ -16,11 +16,11 @@
 
 package coulomb
 
-import coulomb.kernel.Dimension
+import coulomb.kernel.SIDimension
 
 import scala.compiletime.ops.int.*
 
-sealed trait IntDimension:
+sealed trait IntSIDimension:
   type LengthN <: Int & Singleton
   type MassN <: Int & Singleton
   type TimeN <: Int & Singleton
@@ -29,7 +29,7 @@ sealed trait IntDimension:
   type LuminousIntensityN <: Int & Singleton
   type TemperatureN <: Int & Singleton
 
-object IntDimension:
+object IntSIDimension:
   type Aux[
     LengthN0,
     MassN0,
@@ -38,7 +38,7 @@ object IntDimension:
     AmountOfSubstanceN0,
     LuminousIntensityN0,
     TempatureN0
-  ] = IntDimension {
+  ] = IntSIDimension {
     type LengthN <: Int & Singleton
     type MassN <: Int & Singleton
     type TimeN <: Int & Singleton
@@ -48,7 +48,7 @@ object IntDimension:
     type TemperatureN <: Int & Singleton
   }
 
-  given dimension: Dimension[IntDimension] with
+  given SIDimension[IntSIDimension] with
     type Identity = Aux[0, 0, 0, 0, 0, 0, 0]
 
     type Length = Aux[1, 0, 0, 0, 0, 0, 0]
@@ -59,15 +59,15 @@ object IntDimension:
     type LuminousIntensity = Aux[0, 0, 0, 0, 0, 1, 0]
     type Temperature = Aux[0, 0, 0, 0, 0, 0, 1]
 
-    infix type *[D1 <: IntDimension, D2 <: IntDimension] =
+    infix type *[D1 <: IntSIDimension, D2 <: IntSIDimension] =
       (D1, D2) match
         case (Aux[x1, x2, x3, x4, x5, x6, x7], Aux[y1, y2, y3, y4, y5, y6, y7]) =>
           Aux[x1 + y1, x2 + y2, x3 + y3, x4 + y4, x5 + y5, x6 + y6, x7 + y7]
 
-    infix type **[D1 <: IntDimension, N <: Int & Singleton] =
+    infix type **[D1 <: IntSIDimension, N <: Int] =
       D1 match
         case Aux[x1, x2, x3, x4, x5, x6, x7] =>
           Aux[x1 + N, x2 + N, x3 + N, x4 + N, x5 + N, x6 + N, x7 + N]
-    infix type /[D1 <: IntDimension, D2 <: IntDimension] = (D1, D2) match
+    infix type /[D1 <: IntSIDimension, D2 <: IntSIDimension] = (D1, D2) match
       case (Aux[x1, x2, x3, x4, x5, x6, x7], Aux[y1, y2, y3, y4, y5, y6, y7]) =>
         Aux[x1 - y1, x2 - y2, x3 - y3, x4 - y4, x5 - y5, x6 - y6, x7 - y7]
